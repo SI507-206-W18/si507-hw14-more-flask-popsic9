@@ -44,6 +44,7 @@ def add_entry(name, text):
 def delete_entry(id_):
     global entries, next_id
     id_ = id_.split("/")[0]
+    print(id_)
     tmp = {}
     for e in entries:
             if e['id'] == id_:

@@ -28,6 +28,7 @@ def admin():
 @app.route("/delete", methods=["POST"])
 def deleteentry():
     id_ = request.form["id"]
+    print(id_)
     model.delete_entry(id_)
     return redirect("/admin")
 
