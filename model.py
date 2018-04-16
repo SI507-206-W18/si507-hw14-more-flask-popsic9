@@ -74,7 +74,10 @@ def change_message(message):
     global entries, next_id, changeId
     for e in entries:
         if e['id'] == changeId:
+            now = datetime.now()
+            time_string = now.strftime("%b %d, %Y %-I:%M %p")
             e['text'] = message
+            e['timestamp'] = time_string
             break
     try:
         f = open(GUESTBOOK_ENTRIES_FILE, "w")
