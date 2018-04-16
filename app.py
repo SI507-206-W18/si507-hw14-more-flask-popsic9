@@ -28,8 +28,20 @@ def admin():
 @app.route("/delete", methods=["POST"])
 def deleteentry():
     id_ = request.form["id"]
-    print(id_)
     model.delete_entry(id_)
+    return redirect("/admin")
+
+@app.route('/change', methods = ['POST'])
+def changeentry():
+    id_ = request.form["id"]
+    entry = model.get_entry(id_)
+    name = entry['author']
+    return render_template("changeentry.html", name = name)
+
+@app.route('/postchange', methods = ['POST'])
+def postchange():
+    message = request.form["changemessage"]
+    model.change_message(message)
     return redirect("/admin")
 
 if __name__=="__main__":

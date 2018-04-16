@@ -5,6 +5,7 @@ from datetime import datetime
 GUESTBOOK_ENTRIES_FILE = "entries.json"
 entries = []
 next_id = 0
+changeId = ''
 
 def init():
     global entries, next_id
@@ -44,7 +45,6 @@ def add_entry(name, text):
 def delete_entry(id_):
     global entries, next_id
     id_ = id_.split("/")[0]
-    print(id_)
     tmp = {}
     for e in entries:
             if e['id'] == id_:
@@ -59,3 +59,27 @@ def delete_entry(id_):
     except:
         print("ERROR! Could not write entries to file.")
     
+def get_entry(id_):
+    global entries, next_id, changeId
+    id_ = id_.split("/")[0]
+    changeId = id_
+    name = ''
+    for e in entries:
+        if e['id'] == id_:
+            name = e
+            break
+    return name
+
+def change_message(message):
+    global entries, next_id, changeId
+    for e in entries:
+        if e['id'] == changeId:
+            e['text'] = message
+            break
+    try:
+        f = open(GUESTBOOK_ENTRIES_FILE, "w")
+        dump_string = json.dumps(entries)
+        f.write(dump_string)
+        f.close()
+    except:
+        print("ERROR! Could not write entries to file.")

@@ -13,5 +13,9 @@
             <p><input type = "submit" value = "X"/></p>
             <p><input type = "hidden" name = "id" value = {{e['id']}}/></p>
         </form>
+        <form action = "/change" method = "POST">
+            <p><input type = "submit" value = "Change"/></p>
+            <p><input type = "hidden" name = "id" value = {{e['id']}}/></p>
+        </form>
     </div>
 {% endfor %}
